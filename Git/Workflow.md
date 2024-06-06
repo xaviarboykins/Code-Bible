@@ -97,5 +97,3 @@
 
 This workflow ensures that changes are isolated to a specific branch until they are ready to be integrated into the main codebase, facilitating better version control and collaboration.
 ```
-
-You can save this content in a file named `README.md`.
