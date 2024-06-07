@@ -80,7 +80,7 @@
 
 3. Merge the main branch into the feature branch:
     ```sh
-    git merge <main>
+    git merge main
     ```
 
 4. Resolve conflicts if any:
