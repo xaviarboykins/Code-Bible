@@ -22,6 +22,8 @@
     ```
     - **Note**: This shows the status of your working directory and staging area.
 
+## Stage and commit changes
+
 4. **Stage Changes for Commit**
     ```sh
     git add <fileName>  # For specific files
@@ -40,6 +42,8 @@
     ```
     - **Note**: Commit changes with a descriptive message.
 
+## Push file to repo
+
 6. **Push Changes to the Feature Branch**
     ```sh
     git push origin <newBranchName>
@@ -48,6 +52,8 @@
 
 7. **Create a Pull Request (PR)**
     - **Note**: Go to GitHub (or other hosting service) and create a Pull Request from your feature branch to the base branch (e.g., `main`).
+  
+## Merge conflicts
 
 8. **Merging Manually to Main (for Conflict Resolution)**
     ```sh
