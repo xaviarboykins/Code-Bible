@@ -72,17 +72,22 @@
     ```sh
     git pull origin main
     ```
-
-3. Merge the feature branch into the main branch:
+    
+2. Switch back to feature branch:
     ```sh
-    git merge <newBranchName>
+    git checkout <featureBranchName>
+    ```
+
+3. Merge the main branch into the feature branch:
+    ```sh
+    git merge <main>
     ```
 
 4. Resolve conflicts if any:
     - Edit the conflicting files to resolve the issues.
     - Mark the conflicts as resolved using:
       ```sh
-      git add <resolvedFile>
+      git add <resolvedFile> or git add -A
       ```
 
 5. Verify there are no more conflicts:
@@ -90,9 +95,9 @@
     git status
     ```
 
-6. Push the changes to the main branch:
+6. Push the changes for new PR:
     ```sh
-    git push origin main
+    git push origin <featureBranchName>
     ```
 
 This workflow ensures that changes are isolated to a specific branch until they are ready to be integrated into the main codebase, facilitating better version control and collaboration.
