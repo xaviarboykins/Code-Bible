@@ -1,0 +1,102 @@
+namespace YourNamespace.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BaseController : ControllerBase
+    {
+        protected readonly object _service; // Use a specific service type here
+
+        public BaseController(object service) // Replace object with your specific service type
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        public virtual async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var items = await ((dynamic)_service).GetAllAsync(); // Assuming the service has a GetAllAsync method
+                return Ok(items);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public virtual async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var item = await ((dynamic)_service).GetAsync(id); // Assuming the service has a GetAsync method
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public virtual async Task<IActionResult> Create(object createDto) // Replace object with your DTO type
+        {
+            try
+            {
+                await ((dynamic)_service).CreateAsync(createDto); // Assuming the service has a CreateAsync method
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public virtual async Task<IActionResult> Update(int id, object updateDto) // Replace object with your DTO type
+        {
+            try
+            {
+                var existingItem = await ((dynamic)_service).GetAsync(id); // Assuming the service has a GetAsync method
+
+                if (existingItem != null)
+                {
+                    await ((dynamic)_service).UpdateAsync(id, updateDto); // Assuming the service has an UpdateAsync method
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public virtual async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var existingItem = await ((dynamic)_service).GetAsync(id); // Assuming the service has a GetAsync method
+
+                if (existingItem != null)
+                {
+                    await ((dynamic)_service).DeleteAsync(id); // Assuming the service has a DeleteAsync method
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+    }
+}
